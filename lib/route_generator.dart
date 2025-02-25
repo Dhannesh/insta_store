@@ -14,11 +14,11 @@ class RouteGenerator {
     switch (settings.name) {
       case '/':
       case '/home':
-        return MaterialPageRoute(builder: (_) => const HomePage());
+        return CupertinoPageRoute(builder: (_) => const HomePage());
       case '/categories':
-        return MaterialPageRoute(builder: (_) => const CategoriesPage());
+        return CupertinoPageRoute(builder: (_) => const CategoriesPage());
       case '/products':
-        return MaterialPageRoute(builder: (_) =>  ProductsPage(
+        return CupertinoPageRoute(builder: (_) =>  ProductsPage(
           args: args,
           cart:_cart,
           cartItemChanged: (List<String> updateCart) {
@@ -27,24 +27,24 @@ class RouteGenerator {
           },
         ));
       case '/orders':
-        return MaterialPageRoute(builder: (_) => const MyOrders());
+        return CupertinoPageRoute(builder: (_) => const MyOrders());
       case '/address':
-        return MaterialPageRoute(builder: (_) => const MyAddresses());
+        return CupertinoPageRoute(builder: (_) => const MyAddresses());
       case '/reviews':
-        return MaterialPageRoute(builder: (_) => const MyReviews());
+        return CupertinoPageRoute(builder: (_) => const MyReviews());
       default:
         return _errorRoute();
     }
   }
 
   static Route<dynamic> _errorRoute() {
-    return MaterialPageRoute(
-        builder: (_) => Scaffold(
-              appBar: AppBar(
-                backgroundColor: Colors.red,
-                title: Text('Error'),
+    return CupertinoPageRoute(
+        builder: (_) =>  const CupertinoPageScaffold(
+              navigationBar: CupertinoNavigationBar(
+                backgroundColor: CupertinoColors.systemRed,
+                middle: Text('Error'),
               ),
-              body: const Center(
+              child:  Center(
                 child: Text('oops! page not found'),
               ),
             ));
