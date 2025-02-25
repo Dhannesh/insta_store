@@ -1,5 +1,7 @@
-# sample_app
+# sample app
+This will be an Insta Store application that allows you to shop for items in different categories.
 
-Basic Structure of Sample App
+## update icons command
+flutter pub pub run flutter_launcher_icons:main
 
 

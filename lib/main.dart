@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:sample_app/route_generator.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MyStore());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyStore extends StatelessWidget {
+  const MyStore({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return MaterialApp(
+      onGenerateRoute: RouteGenerator().generateRoute,
+      title: 'Insta Store',
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        primarySwatch: Colors.amber
+      ),
+
+    );
   }
 }
