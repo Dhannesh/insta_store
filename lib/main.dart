@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:sample_app/route_generator.dart';
 
 void main() {
@@ -10,12 +10,13 @@ class MyStore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return CupertinoApp(
       onGenerateRoute: RouteGenerator().generateRoute,
       title: 'Insta Store',
-      theme: ThemeData(
+      debugShowCheckedModeBanner: false,
+      theme: CupertinoThemeData(
         brightness: Brightness.dark,
-        primarySwatch: Colors.amber
+        primaryColor: CupertinoColors.activeOrange
       ),
 
     );

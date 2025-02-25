@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:sample_app/screens/address.dart';
 import 'package:sample_app/screens/categories.dart';
 import 'package:sample_app/screens/home.dart';
