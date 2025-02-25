@@ -1,4 +1,4 @@
-# sample app
+# Insta Store
 This will be an Insta Store application that allows you to shop for items in different categories.
 
 ## update icons command
