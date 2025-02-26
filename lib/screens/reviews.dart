@@ -1,49 +1,118 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class MyReviews extends StatelessWidget {
   const MyReviews({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('My Reviews'),
-        backgroundColor: Colors.blueGrey,
+    return SafeArea(
+        child: CupertinoPageScaffold(
+      navigationBar: const CupertinoNavigationBar(
+        middle: Text('My Reviews'),
       ),
-      body: Padding(
+      child: Padding(
         padding: EdgeInsets.fromLTRB(4, 24, 4, 24),
         child: ListView(
-          children: const <Widget>[
-            ListTile(
-              leading: CircleAvatar(
-                backgroundImage: AssetImage('images/fashion_heels.jpg'),
-              ),
-              title: Text('Awesome fit!',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-              trailing: Icon(Icons.favorite),
-              subtitle: Text('Loved the color and fit, excellent'),
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 12),
+                  child: SizedBox(
+                    height: 28,
+                    width: 28,
+                    child: DecoratedBox(
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(4))),
+                      child: Image.asset('images/fashion_heels.jpg'),
+                    ),
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    const Text('Awesome fit!',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold)),
+                    Text('Loved the color and fit, excellent',
+                        style: TextStyle(
+                            fontSize: 15, color: CupertinoColors.systemGrey)),
+                  ],
+                ),
+                const SizedBox(
+                  width: 70,
+                ),
+                const Icon(CupertinoIcons.heart_solid)
+              ],
             ),
-            ListTile(
-              leading: CircleAvatar(
-                backgroundImage: AssetImage('images/pocket_watches.jpg'),
-              ),
-              title: Text('Broken Item',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-              trailing: Icon(Icons.mood_bad_sharp),
-              subtitle: Text('Received item was broken'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 12),
+                  child: SizedBox(
+                    height: 28,
+                    width: 28,
+                    child: DecoratedBox(
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(4))),
+                      child: Image.asset('images/pocket_watches.jpg'),
+                    ),
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    const Text('Broken Item!',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold)),
+                    Text('Received item was broken',
+                        style: TextStyle(
+                            fontSize: 15, color: CupertinoColors.systemGrey)),
+                  ],
+                ),
+                const SizedBox(
+                  width: 70,
+                ),
+                const Icon(CupertinoIcons.hand_thumbsdown_fill)
+              ],
             ),
-            ListTile(
-              leading: CircleAvatar(
-                backgroundImage: AssetImage('images/joystick.jpg'),
-              ),
-              title: Text('Value for money',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-              trailing: Icon(Icons.thumb_up_sharp),
-              subtitle: Text('The joystick is functional works well'),
-            )
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 12),
+                  child: SizedBox(
+                    height: 28,
+                    width: 28,
+                    child: DecoratedBox(
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(4))),
+                      child: Image.asset('images/joystick.jpg'),
+                    ),
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    const Text('Value for money',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold)),
+                    Text('The joystick is functional works well',
+                        style: TextStyle(
+                            fontSize: 15, color: CupertinoColors.systemGrey)),
+                  ],
+                ),
+                const SizedBox(
+                  width: 70,
+                ),
+                const Icon(CupertinoIcons.hand_thumbsup_fill)
+              ],
+            ),
           ],
         ),
       ),
-    );
+    ));
   }
 }
