@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../data/categories_products_util.dart';
 
@@ -26,8 +26,8 @@ class ProductItemState extends State<ProductItem> {
   }
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
+    return CupertinoButton(
+      onPressed: () {
         setState(() {
           isSelected = !isSelected;
           widget.productItemSelectedStateChanged(isSelected);
@@ -35,15 +35,14 @@ class ProductItemState extends State<ProductItem> {
 
         debugPrint("${widget.product.title} is selected: ${isSelected}");
       },
-      child: Stack(children: <Widget>[
-        Padding(
-          padding: EdgeInsets.all(5),
-          child: Container(
-            height: 200,
-            width: 200,
-            padding: const EdgeInsets.all(10),
+      child: Stack(
+          children: <Widget>[
+          Container(
+            height: 250,
+            width: 250,
+            padding: const EdgeInsets.only(top: 15),
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.amberAccent, width: 2),
+              border: Border.all(color: CupertinoColors.activeOrange, width: 2),
               borderRadius: BorderRadius.all(
                 Radius.circular(10),
               ),
@@ -52,28 +51,28 @@ class ProductItemState extends State<ProductItem> {
               children: [
                 Image(
                   image: AssetImage(widget.product.imageName),
-                  width: 125,
-                  height: 125,
-                  color: Colors.black.withOpacity(isSelected ? 0.9 : 0),
+                  width: 75,
+                  height: 75,
+                  color: CupertinoColors.black.withOpacity(isSelected ? 0.9 : 0),
                   colorBlendMode: BlendMode.color,
                   fit: BoxFit.cover,
                 ),
                 Padding(
-                  padding: EdgeInsets.all(8),
+                  padding: EdgeInsets.only(top: 5),
                   child: Text(widget.product.title),
                 )
               ],
             ),
           ),
-        ),
+
         widget.isSelected
             ? const Align(
                 alignment: Alignment.bottomRight,
                 child: Padding(
                   padding: EdgeInsets.all(8),
                   child: Icon(
-                    Icons.check_circle,
-                    color: Colors.blue,
+                    CupertinoIcons.checkmark_alt_circle_fill,
+                    color: CupertinoColors.activeBlue,
                   ),
                 ),
               )
