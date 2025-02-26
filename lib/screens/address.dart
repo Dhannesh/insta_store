@@ -1,28 +1,22 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class MyAddresses extends StatelessWidget {
   const MyAddresses({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('My Addresses'),
-        backgroundColor: Colors.blueGrey,
-      ),
-      body: GridView.count(
-          crossAxisCount: 2,
-          padding: EdgeInsets.all(15),
-          crossAxisSpacing: 15,
-          mainAxisSpacing: 15,
-          children: List.generate(
-    addresses.length,
-    (index) =>
-    AddressItem(address: addresses[index]
-    )
-    ),
-    )
-    );
+    return SafeArea(
+        child: CupertinoPageScaffold(
+            navigationBar: const CupertinoNavigationBar(
+              middle: Text('My Addresses'),
+            ),
+            child: GridView.count(
+              crossAxisCount: 2,
+              crossAxisSpacing: 15,
+              mainAxisSpacing: 15,
+              children: List.generate(addresses.length,
+                  (index) => AddressItem(address: addresses[index])),
+            )));
   }
 }
 
@@ -53,27 +47,33 @@ class AddressItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      child: Card(
-        color: Colors.amberAccent,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(
-                address.title,
-                style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
-              ),
-              Text(
-                address.subtitle,
-                style: const TextStyle(fontSize: 15, color: Colors.black),
-              )
-            ],
+      child: SafeArea(
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            border: Border.all(color: CupertinoColors.white),
           ),
-        ),
-      ),
-    );
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      address.title,
+                      style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: CupertinoColors.white),
+                    ),
+                    Text(
+                      address.subtitle,
+                      style: const TextStyle(fontSize: 15, color: CupertinoColors.white),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          )
+        );
+
   }
 }
