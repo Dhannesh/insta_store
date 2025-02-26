@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:sample_app/data/categories_products_util.dart';
 
 class CategoriesPage extends StatelessWidget {
@@ -6,49 +6,51 @@ class CategoriesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Insta Store'),
-          backgroundColor: Colors.blueGrey,
-        ),
-        body: GridView.custom(
-            padding: const EdgeInsets.all(10),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10),
-            childrenDelegate: SliverChildBuilderDelegate((context, int index) {
-              return Stack(
-                children: <Widget>[
-                  Container(
-                    alignment: Alignment.center,
-                    child: Image.asset(
-                      categoriesMap[index].image,
-                      height: double.infinity,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.bottomCenter,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/products', arguments: {
-                          'category': categoriesMap[index].title
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.deepOrangeAccent,
-                          fixedSize: const Size(200, 48),
-                          shape: const StadiumBorder()),
-                      child: Text(categoriesMap[index].title,
-                      style: TextStyle(
-                        color: Colors.white
-                      ),),
-                    ),
-                  )
-                ],
-              );
-            },
-              childCount: categoriesMap.length,
-            )));
+    return SafeArea(
+        child: CupertinoPageScaffold(
+            navigationBar: const CupertinoNavigationBar(
+              middle: Text('Insta Store'),
+            ),
+            child: GridView.custom(
+                padding: const EdgeInsets.all(10),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 1),
+                childrenDelegate: SliverChildBuilderDelegate(
+                  (context, int index) {
+                    return SafeArea(
+                      child: Stack(
+                        children: <Widget>[
+                          Container(
+                            width: 300,
+                            height: 300,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: CupertinoColors.white),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
+                            ),
+                            child: Image.asset(
+                              categoriesMap[index].image,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          Container(
+                            alignment: Alignment.bottomCenter,
+                            child: CupertinoButton.filled(
+                              child: Text(categoriesMap[index].title),
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/products',
+                                    arguments: {
+                                      'category': categoriesMap[index].title
+                                    });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  childCount: categoriesMap.length,
+                ))));
   }
 }

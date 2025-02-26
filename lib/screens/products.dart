@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:sample_app/screens/product_item.dart';
 
 import '../data/categories_products_util.dart';
@@ -32,55 +32,43 @@ class ProductsPageState extends State<ProductsPage> {
     var category = widget.args['category'] as String;
     var products = productsMap[category] ?? [];
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Products"),
-        actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(right: 16, top: 8),
-            child: GestureDetector(
-              child: Stack(
-                alignment: Alignment.topCenter,
-                children: <Widget>[
-                  const Icon(Icons.shopping_cart, size: 20),
-                  if (_cartCopy.isNotEmpty)
-                    Padding(
-                        padding: const EdgeInsets.only(left: 2),
-                        child: CircleAvatar(
-                          radius: 8,
-                          backgroundColor: Colors.red,
-                          foregroundColor: Colors.white,
-                          child: Text(
-                            _cartCopy.length.toString(),
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 12),
-                          ),
-                        ))
-                ],
-              ),
-              onTap: () {
-                if (_cartCopy.isNotEmpty) {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => CartPage(
-                          cart: _cartCopy,
-                          cartItemChanged: (List<String> cart) {
-                            setState(() {
-                              _cartCopy.clear();
-                              _cartCopy.addAll(cart);
-                              debugPrint(
-                                  "Products state is updataed from cart");
-                              widget.cartItemChanged(_cartCopy);
-                            });
-                          })));
-                }
-                ;
-              },
-            ),
+    return SafeArea(
+        child: CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        trailing: Align(
+          alignment: const Alignment(1, 0),
+          child: CupertinoButton(
+            child: Stack(alignment: Alignment.topCenter, children: <Widget>[
+              const Icon(CupertinoIcons.cart, size: 25),
+              if (_cartCopy.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(left: 5.0),
+                  child: Text(
+                    _cartCopy.length.toString(),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 12),
+                  ),
+                )
+            ]),
+            onPressed: () {
+              if (_cartCopy.isNotEmpty) {
+                Navigator.of(context).push(CupertinoPageRoute(
+                    builder: (context) => CartPage(
+                        cart: _cartCopy,
+                        cartItemChanged: (List<String> cart) {
+                          setState(() {
+                            _cartCopy.clear();
+                            _cartCopy.addAll(cart);
+                            debugPrint("Products state is updataed from cart");
+                            widget.cartItemChanged(_cartCopy);
+                          });
+                        })));
+              }
+            },
           ),
-        ],
+        ),
       ),
-      body: GridView.builder(
-          padding: EdgeInsets.all(4),
+      child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2),
           itemCount: products.length,
@@ -101,6 +89,6 @@ class ProductsPageState extends State<ProductsPage> {
                   });
                 });
           }),
-    );
+    ));
   }
 }
