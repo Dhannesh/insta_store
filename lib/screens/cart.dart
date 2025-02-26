@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class CartPage extends StatefulWidget {
   final List<String> cart;
@@ -21,32 +21,46 @@ class CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Cart'),
+    return SafeArea(
+        child: CupertinoPageScaffold(
+      navigationBar: const CupertinoNavigationBar(
+        middle: Text('Cart'),
       ),
-      body: ListView.builder(
+      child: ListView.builder(
           itemCount: _cartCopy.length,
           itemBuilder: (context, index) {
             var item = _cartCopy[index];
             return Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                child: Card(
-                  elevation: 4,
-                  child: ListTile(
-                    title: Text(item),
-                    trailing: GestureDetector(
-                        child: const Icon(Icons.remove_circle,
-                            color: Colors.amber),
-                        onTap: () {
-                          setState(() {
-                            _cartCopy.remove(item);
-                            widget.cartItemChanged(_cartCopy);
-                          });
-                        }),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: CupertinoColors.white,
+                    border: Border.all(
+                        color: CupertinoColors.activeOrange, width: 2),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        item,
+                        style: const TextStyle(
+                            fontSize: 16, color: CupertinoColors.black),
+                      ),
+                      CupertinoButton(
+                          child: const Icon(CupertinoIcons.minus_circle),
+                          onPressed: () {
+                            setState(() {
+                              _cartCopy.remove(item);
+                              widget.cartItemChanged(_cartCopy);
+                            });
+                          })
+                    ],
                   ),
                 ));
           }),
-    );
+    ));
   }
 }
