@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
 import 'profile.dart';
 
 class HomePage extends StatelessWidget {
@@ -17,51 +18,57 @@ class HomePage extends StatelessWidget {
       'images/shoes.jpg',
       'images/cosmetics.jpg',
     ];
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Insta Store'),
-      ),
-      body: Column(
-        children: [
-          CarouselSlider(
-            options: CarouselOptions(
-              height: 450,
-              viewportFraction: 1.0,
-              autoPlay: true,
-              enlargeCenterPage: true,
-              // autoPlayInterval: const Duration(seconds: 3),
-            ),
-            items: carouselImages
-                .map((e) => Image.asset(
-                      e,
-                      fit: BoxFit.cover,
-                    ))
-                .toList(),
+    return SafeArea(
+      child: CupertinoPageScaffold(
+          child: CustomScrollView(slivers: <Widget>[
+        CupertinoSliverNavigationBar(
+          leading: IconButton(
+            icon: Icon(CupertinoIcons.person_circle),
+            onPressed: () {
+              Navigator.push(
+                context,
+                CupertinoPageRoute(builder: (context) => Profile()),
+              );
+            },
           ),
-          Expanded(
-              flex: 1,
-              child: Center(
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      elevation: 12,
-                      backgroundColor: Colors.deepOrange,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12))),
-                  child: const Padding(
-                    padding: EdgeInsets.all(16),
-                    child: Text(
-                      'Shop Now!',
-                      style: TextStyle(fontSize: 20, color: Colors.white),
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/categories');
-                  },
+          largeTitle: Text('Insta Store'),
+          // trailing: Icon(CupertinoIcons.add_circled),
+        ),
+        SliverFillRemaining(
+          child: Column(
+            children: [
+              CarouselSlider(
+                options: CarouselOptions(
+                  height: 450,
+                  viewportFraction: 1.0,
+                  autoPlay: true,
+                  enlargeCenterPage: true,
+                  // autoPlayInterval: const Duration(seconds: 3),
                 ),
-              ))
-        ],
-      ),
-      drawer: Profile(),
+                items: carouselImages
+                    .map((e) => Image.asset(
+                          e,
+                          fit: BoxFit.cover,
+                        ))
+                    .toList(),
+              ),
+              Expanded(
+                  flex: 1,
+                  child: Center(
+                    child: CupertinoButton.filled(
+                      borderRadius: const BorderRadius.all(Radius.circular(15)),
+                      child: const Text('Show Now!',
+                          style: TextStyle(
+                              fontSize: 20, color: CupertinoColors.white)),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/categories');
+                      },
+                    ),
+                  ))
+            ],
+          ),
+        )
+      ])),
     );
   }
 }
